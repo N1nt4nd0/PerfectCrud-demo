@@ -21,7 +21,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     @Transactional
     public TeamDto createTeam(final long workspaceId, final String name) {
-        return mapper.toDto(repository.saveAndFlush(new Team(workspaceId, name)));
+        return mapper.toDto(repository.save(new Team(workspaceId, name)));
     }
 
     @Override

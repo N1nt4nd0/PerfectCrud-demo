@@ -21,7 +21,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Override
     @Transactional
     public WorkspaceDto createWorkspace(final String name) {
-        return mapper.toDto(repository.saveAndFlush(new Workspace(name)));
+        return mapper.toDto(repository.save(new Workspace(name)));
     }
 
     @Override
