@@ -51,7 +51,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         repository.delete(findByIdOrThrow(id));
     }
 
-    private Workspace findByIdOrThrow(long id) {
+    private Workspace findByIdOrThrow(final long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Workspace not found"));
     }

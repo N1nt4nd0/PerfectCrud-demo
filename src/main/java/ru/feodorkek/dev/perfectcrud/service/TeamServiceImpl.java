@@ -52,7 +52,7 @@ public class TeamServiceImpl implements TeamService {
         repository.delete(findByIdOrThrow(id));
     }
 
-    private Team findByIdOrThrow(long id) {
+    private Team findByIdOrThrow(final long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Team not found"));
     }

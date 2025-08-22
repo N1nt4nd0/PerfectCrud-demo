@@ -30,7 +30,7 @@ The project follows a layered architecture:
 - **Model Layer**: Contains JPA entities representing database tables.
 - **Exception Layer**: Handles custom exceptions and global error handling.
 - **Config Layer**: Stores configuration classes, including OpenAPI and exception handling advice.
-- **Properties Layer**: Manages API-related properties.
+- **Properties Layer**: Manages properties from application.yml.
 
 ## Directory Structure
 
@@ -42,7 +42,7 @@ src/main/java/ru/feodorkek/dev/perfectcrud/
 ├── exception/        # Custom exceptions
 ├── mapper/           # MapStruct mappers
 ├── model/            # JPA entities (with base entities for auditing)
-├── properties/       # API properties classes
+├── properties/       # Properties classes (Rest API properties)
 ├── repository/       # Spring Data JPA repositories
 ├── service/          # Service interfaces and implementations
 ├── usecase/          # UseCase interfaces and implementations
@@ -66,7 +66,7 @@ src/main/java/ru/feodorkek/dev/perfectcrud/
 ## How to Run
 
 1. Clone the repository.
-2. Set up reqired environment variables from application.yml.
+2. Set up required environment variables from application.yml.
 3. Run `./gradlew bootRun` or use your IDE to start the application.
 4. Access the API documentation at `/swagger-ui.html`.
 
