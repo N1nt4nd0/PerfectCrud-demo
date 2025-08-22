@@ -16,11 +16,11 @@ public class RestControllerAdviceConfig {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleValidationException(
             final MethodArgumentNotValidException exception) {
-        log.warn("Validation exception occurred: {}", exception.getMessage());
         final var message = exception.getBindingResult().getFieldErrors().stream()
                 .map(error -> String.format("%s: %s", error.getField(), error.getDefaultMessage()))
                 .reduce((msg1, msg2) -> String.format("%s, %s", msg1, msg2))
                 .orElse("Bad request arguments");
+        log.warn("Validation exception occurred: {}", message);
         return ResponseEntity.badRequest()
                 .body(new ExceptionResponse(MethodArgumentNotValidException.class.getSimpleName(), message));
     }
