@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 public class PerfectCrudApplication {
 
-	public static void main(final String[] args) {
-		SpringApplication.run(PerfectCrudApplication.class, args);
-	}
+    public static void main(final String[] args) {
+        SpringApplication.run(PerfectCrudApplication.class, args);
+    }
 
 }
