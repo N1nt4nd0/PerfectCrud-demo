@@ -21,7 +21,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Override
     @Transactional
     public WorkspaceDto createWorkspace(final String name) {
-        return mapper.toDto(repository.save(new Workspace(name)));
+        return mapper.toDto(repository.saveAndFlush(new Workspace(name)));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     public WorkspaceDto updateWorkspaceById(final long id, final String name) {
         final var workspace = findByIdOrThrow(id);
         workspace.setName(name);
-        return mapper.toDto(repository.save(workspace));
+        return mapper.toDto(repository.saveAndFlush(workspace));
     }
 
     @Override
@@ -41,7 +41,8 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Override
     @Transactional(readOnly = true)
     public List<WorkspaceDto> getAllWorkspaces() {
-        return repository.findAllByOrderByCreatedAtAsc().stream().map(mapper::toDto).toList();
+        return repository.findAllByOrderByCreatedAtAsc().stream()
+                .map(mapper::toDto).toList();
     }
 
     @Override
@@ -51,7 +52,8 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     private Workspace findByIdOrThrow(long id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Workspace not found"));
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Workspace not found"));
     }
 
 }

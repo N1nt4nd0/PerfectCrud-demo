@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public class WorkspaceRestController {
     }
 
     @Operation(summary = "update workspace")
-    @PutMapping("${rest-api.endpoints.workspace-update}")
+    @PatchMapping("${rest-api.endpoints.workspace-update}")
     public ResponseEntity<WorkspaceResponse> updateWorkspace(@RequestBody @Valid final UpdateWorkspaceRequest request) {
         return ResponseEntity.ok(useCases.updateWorkspace(request));
     }
@@ -64,7 +64,7 @@ public class WorkspaceRestController {
     }
 
     @Operation(summary = "update team")
-    @PutMapping("${rest-api.endpoints.team-update}")
+    @PatchMapping("${rest-api.endpoints.team-update}")
     public ResponseEntity<TeamResponse> updateTeam(@RequestBody @Valid final UpdateTeamRequest request) {
         return ResponseEntity.ok(useCases.updateTeam(request));
     }

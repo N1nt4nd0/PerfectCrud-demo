@@ -49,9 +49,10 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
         if (workspaces.isEmpty()) {
             return List.of();
         }
-        final var workspacesIds = workspaces.stream().map(WorkspaceDto::id).toList();
-        final var teams = teamService.getTeamsByWorkspaceIds(workspacesIds);
-        final var teamsByWorkspace = teams.stream().collect(Collectors.groupingBy(TeamDto::workspaceId));
+        final var workspacesIds = workspaces.stream()
+                .map(WorkspaceDto::id).toList();
+        final var teamsByWorkspace = teamService.getTeamsByWorkspaceIds(workspacesIds).stream()
+                .collect(Collectors.groupingBy(TeamDto::workspaceId));
         return workspaces.stream()
                 .map(ws -> workspaceMapper.toResponse(ws, teamsByWorkspace.getOrDefault(ws.id(), List.of())))
                 .toList();

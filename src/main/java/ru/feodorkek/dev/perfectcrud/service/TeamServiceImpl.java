@@ -21,7 +21,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     @Transactional
     public TeamDto createTeam(final long workspaceId, final String name) {
-        return mapper.toDto(repository.save(new Team(workspaceId, name)));
+        return mapper.toDto(repository.saveAndFlush(new Team(workspaceId, name)));
     }
 
     @Override
@@ -29,19 +29,21 @@ public class TeamServiceImpl implements TeamService {
     public TeamDto updateTeamById(final long id, final String name) {
         final var team = findByIdOrThrow(id);
         team.setName(name);
-        return mapper.toDto(repository.save(team));
+        return mapper.toDto(repository.saveAndFlush(team));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TeamDto> getTeamsByWorkspaceId(final long workspaceId) {
-        return repository.findAllByWorkspaceIdOrderByCreatedAtAsc(workspaceId).stream().map(mapper::toDto).toList();
+        return repository.findAllByWorkspaceIdOrderByCreatedAtAsc(workspaceId).stream()
+                .map(mapper::toDto).toList();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TeamDto> getTeamsByWorkspaceIds(final List<Long> workspaceIds) {
-        return repository.findAllByWorkspaceIdInOrderByCreatedAtAsc(workspaceIds).stream().map(mapper::toDto).toList();
+        return repository.findAllByWorkspaceIdInOrderByCreatedAtAsc(workspaceIds).stream()
+                .map(mapper::toDto).toList();
     }
 
     @Override
@@ -51,7 +53,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     private Team findByIdOrThrow(long id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Team not found"));
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Team not found"));
     }
 
 }
