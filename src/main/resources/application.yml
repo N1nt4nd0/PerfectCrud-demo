@@ -1,3 +1,40 @@
 spring:
   application:
     name: perfect-crud
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    open-in-view: false
+    show-sql: ${JPA_SHOW_SQL}
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog.sql
+
+server:
+  port: ${PORT}
+  servlet:
+    encoding:
+      force-response: true
+      charset: UTF-8
+
+rest-api:
+  info:
+    title: Perfect CRUD API
+    version: 0.0.1
+    author-email: author.example@gmail.com
+  endpoints:
+    workspace-create: /api/workspace/create
+    workspace-update: /api/workspace/update
+    workspace-delete: /api/workspace/delete
+    workspace-list: /api/workspace/list
+    team-create: /api/team/create
+    team-update: /api/team/update
+    team-delete: /api/team/delete
+
+springdoc:
+  swagger-ui:
+    display-request-duration: true

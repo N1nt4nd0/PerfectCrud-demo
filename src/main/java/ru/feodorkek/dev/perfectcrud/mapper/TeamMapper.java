@@ -6,7 +6,7 @@ import ru.feodorkek.dev.perfectcrud.model.Team;
 
 public interface TeamMapper {
 
-    TeamResponse toResponse(TeamDto teamDto);
+    TeamResponse toResponse(TeamDto dto);
 
     TeamDto toDto(Team team);
 
