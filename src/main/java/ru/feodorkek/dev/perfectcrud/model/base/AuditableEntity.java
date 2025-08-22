@@ -25,7 +25,7 @@ public class AuditableEntity extends BaseEntity {
     private Instant createdAt;
 
     @LastModifiedDate
-    @Column(name = "modified_at")
+    @Column(name = "modified_at", nullable = false)
     private Instant modifiedAt;
 
 }
