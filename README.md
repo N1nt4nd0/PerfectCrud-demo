@@ -8,9 +8,14 @@ documentation.
 
 ## Technologies
 
-- Java
-- Spring Boot
-- Gradle
+- Java `17`
+- Gradle `8.14.3`
+- Spring Boot `3.5.4`
+- Spring Data JPA
+- Spring Web
+- PostgreSQL
+- Liquibase
+- Lombok
 - MapStruct
 - OpenAPI (Swagger)
 - Jakarta Validation
