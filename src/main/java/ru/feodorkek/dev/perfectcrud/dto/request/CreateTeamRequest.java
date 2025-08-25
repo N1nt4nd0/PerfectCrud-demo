@@ -6,5 +6,5 @@ import jakarta.validation.constraints.Size;
 
 public record CreateTeamRequest(
         @Min(1) long workspaceId,
-        @NotBlank @Size(min = 1, max = 30) String name) {
+        @NotBlank @Size(min = 1, max = 30) String teamName) {
 }

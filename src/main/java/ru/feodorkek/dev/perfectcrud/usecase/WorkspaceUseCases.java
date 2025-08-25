@@ -1,9 +1,5 @@
 package ru.feodorkek.dev.perfectcrud.usecase;
 
-import ru.feodorkek.dev.perfectcrud.dto.request.CreateTeamRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.CreateWorkspaceRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.UpdateTeamRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.UpdateWorkspaceRequest;
 import ru.feodorkek.dev.perfectcrud.dto.response.TeamResponse;
 import ru.feodorkek.dev.perfectcrud.dto.response.WorkspaceResponse;
 
@@ -11,18 +7,18 @@ import java.util.List;
 
 public interface WorkspaceUseCases {
 
-    WorkspaceResponse createWorkspace(CreateWorkspaceRequest request);
+    WorkspaceResponse createWorkspace(String workspaceName);
 
-    WorkspaceResponse updateWorkspace(UpdateWorkspaceRequest request);
+    WorkspaceResponse updateWorkspace(long workspaceId, String newName);
 
     List<WorkspaceResponse> getWorkspaces();
 
-    void deleteWorkspace(long id);
+    void deleteWorkspace(long workspaceId);
 
-    TeamResponse createTeam(CreateTeamRequest request);
+    TeamResponse createTeam(long workspaceId, String teamName);
 
-    TeamResponse updateTeam(UpdateTeamRequest request);
+    TeamResponse updateTeam(long teamId, String newName);
 
-    void deleteTeam(long id);
+    void deleteTeam(long teamId);
 
 }

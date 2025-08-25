@@ -35,13 +35,13 @@ public class WorkspaceRestController {
     @Operation(summary = "create workspace")
     @PostMapping("${rest-api.endpoints.workspace-create}")
     public ResponseEntity<WorkspaceResponse> createWorkspace(@RequestBody @Valid final CreateWorkspaceRequest request) {
-        return ResponseEntity.ok(useCases.createWorkspace(request));
+        return ResponseEntity.ok(useCases.createWorkspace(request.workspaceName()));
     }
 
     @Operation(summary = "update workspace")
     @PatchMapping("${rest-api.endpoints.workspace-update}")
     public ResponseEntity<WorkspaceResponse> updateWorkspace(@RequestBody @Valid final UpdateWorkspaceRequest request) {
-        return ResponseEntity.ok(useCases.updateWorkspace(request));
+        return ResponseEntity.ok(useCases.updateWorkspace(request.workspaceId(), request.newName()));
     }
 
     @Operation(summary = "delete workspace")
@@ -60,19 +60,19 @@ public class WorkspaceRestController {
     @Operation(summary = "create team")
     @PostMapping("${rest-api.endpoints.team-create}")
     public ResponseEntity<TeamResponse> createTeam(@RequestBody @Valid final CreateTeamRequest request) {
-        return ResponseEntity.ok(useCases.createTeam(request));
+        return ResponseEntity.ok(useCases.createTeam(request.workspaceId(), request.teamName()));
     }
 
     @Operation(summary = "update team")
     @PatchMapping("${rest-api.endpoints.team-update}")
     public ResponseEntity<TeamResponse> updateTeam(@RequestBody @Valid final UpdateTeamRequest request) {
-        return ResponseEntity.ok(useCases.updateTeam(request));
+        return ResponseEntity.ok(useCases.updateTeam(request.teamId(), request.newName()));
     }
 
     @Operation(summary = "delete team")
     @DeleteMapping("${rest-api.endpoints.team-delete}")
-    public ResponseEntity<Void> deleteTeam(@RequestParam @Min(1) final long id) {
-        useCases.deleteTeam(id);
+    public ResponseEntity<Void> deleteTeam(@RequestParam @Min(1) final long teamId) {
+        useCases.deleteTeam(teamId);
         return ResponseEntity.ok().build();
     }
 

@@ -5,10 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.feodorkek.dev.perfectcrud.dto.model.TeamDto;
 import ru.feodorkek.dev.perfectcrud.dto.model.WorkspaceDto;
-import ru.feodorkek.dev.perfectcrud.dto.request.CreateTeamRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.CreateWorkspaceRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.UpdateTeamRequest;
-import ru.feodorkek.dev.perfectcrud.dto.request.UpdateWorkspaceRequest;
 import ru.feodorkek.dev.perfectcrud.dto.response.TeamResponse;
 import ru.feodorkek.dev.perfectcrud.dto.response.WorkspaceResponse;
 import ru.feodorkek.dev.perfectcrud.mapper.TeamMapper;
@@ -30,14 +26,14 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
 
     @Override
     @Transactional
-    public WorkspaceResponse createWorkspace(final CreateWorkspaceRequest request) {
-        return workspaceMapper.toResponse(workspaceService.createWorkspace(request.name()), List.of());
+    public WorkspaceResponse createWorkspace(final String workspaceName) {
+        return workspaceMapper.toResponse(workspaceService.createWorkspace(workspaceName), List.of());
     }
 
     @Override
     @Transactional
-    public WorkspaceResponse updateWorkspace(final UpdateWorkspaceRequest request) {
-        final var workspace = workspaceService.updateWorkspaceById(request.id(), request.name());
+    public WorkspaceResponse updateWorkspace(final long workspaceId, final String newName) {
+        final var workspace = workspaceService.updateWorkspaceById(workspaceId, newName);
         final var teams = teamService.getTeamsByWorkspaceId(workspace.id());
         return workspaceMapper.toResponse(workspace, teams);
     }
@@ -60,28 +56,28 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
 
     @Override
     @Transactional
-    public void deleteWorkspace(final long id) {
-        workspaceService.deleteWorkspaceById(id);
+    public void deleteWorkspace(final long workspaceId) {
+        workspaceService.deleteWorkspaceById(workspaceId);
     }
 
     @Override
     @Transactional
-    public TeamResponse createTeam(final CreateTeamRequest request) {
-        final var workspace = workspaceService.getWorkspaceById(request.workspaceId());
-        return teamMapper.toResponse(teamService.createTeam(workspace.id(), request.name()));
+    public TeamResponse createTeam(final long workspaceId, final String teamName) {
+        final var workspace = workspaceService.getWorkspaceById(workspaceId);
+        return teamMapper.toResponse(teamService.createTeam(workspace.id(), teamName));
     }
 
     @Override
     @Transactional
-    public TeamResponse updateTeam(final UpdateTeamRequest request) {
-        final var team = teamService.updateTeamById(request.id(), request.name());
+    public TeamResponse updateTeam(final long teamId, final String newName) {
+        final var team = teamService.updateTeamById(teamId, newName);
         return teamMapper.toResponse(team);
     }
 
     @Override
     @Transactional
-    public void deleteTeam(final long id) {
-        teamService.deleteTeamById(id);
+    public void deleteTeam(final long teamId) {
+        teamService.deleteTeamById(teamId);
     }
 
 }

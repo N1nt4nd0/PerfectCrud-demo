@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UpdateWorkspaceRequest(
-        @Min(1) long id,
-        @NotBlank @Size(min = 1, max = 30) String name) {
+        @Min(1) long workspaceId,
+        @NotBlank @Size(min = 1, max = 30) String newName) {
 }
