@@ -38,6 +38,7 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
         return workspaceMapper.toResponse(workspace, teams);
     }
 
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     @Override
     @Transactional(readOnly = true)
     public List<WorkspaceResponse> getWorkspaces() {
