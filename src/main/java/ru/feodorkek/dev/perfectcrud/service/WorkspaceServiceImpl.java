@@ -28,8 +28,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Transactional
     public WorkspaceDto updateWorkspaceById(final long id, final String name) {
         final var workspace = findByIdOrThrow(id);
-        workspace.setName(name);
-        return mapper.toDto(repository.saveAndFlush(workspace));
+        return mapper.toDto(repository.saveAndFlush(workspace.withName(name)));
     }
 
     @Override

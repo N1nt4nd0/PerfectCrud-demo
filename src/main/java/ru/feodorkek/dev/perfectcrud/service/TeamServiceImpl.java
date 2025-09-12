@@ -28,8 +28,7 @@ public class TeamServiceImpl implements TeamService {
     @Transactional
     public TeamDto updateTeamById(final long id, final String name) {
         final var team = findByIdOrThrow(id);
-        team.setName(name);
-        return mapper.toDto(repository.saveAndFlush(team));
+        return mapper.toDto(repository.saveAndFlush(team.withName(name)));
     }
 
     @Override

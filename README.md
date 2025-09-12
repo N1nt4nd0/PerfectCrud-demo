@@ -67,6 +67,7 @@ src/main/java/ru/feodorkek/dev/perfectcrud/
 - MapStruct for efficient mapping between entities and DTOs.
 - OpenAPI integration for auto-generated API documentation.
 - Centralized exception handling.
+- Models immutability with Lombok.
 
 ## How to Run
 
