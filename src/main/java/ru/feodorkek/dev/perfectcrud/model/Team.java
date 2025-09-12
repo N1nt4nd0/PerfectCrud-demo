@@ -26,7 +26,7 @@ import java.time.Instant;
 @Getter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
 public class Team {
 
     @Id
@@ -35,10 +35,10 @@ public class Team {
     private Long id;
 
     @Column(name = "workspace_id", nullable = false)
-    private long workspaceId;
+    private final long workspaceId;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private final String name;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
