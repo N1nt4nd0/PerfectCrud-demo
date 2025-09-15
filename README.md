@@ -71,9 +71,19 @@ src/main/java/ru/feodorkek/dev/perfectcrud/
 ## How to Run
 
 1. Clone the repository.
-2. Set up required environment variables from application.yml.
+2. Set up required environment variables.
 3. Run `./gradlew bootRun` or use your IDE to start the application.
 4. Access the API documentation at `/swagger-ui.html`.
+
+## Environment Variables
+
+| Variable            | Type    | Description                                  | Example Value                                   |
+|---------------------|---------|----------------------------------------------|-------------------------------------------------|
+| `PORT`              | number  | Port for running the application             | `8080`                                          |
+| `DATABASE_URL`      | string  | PostgreSQL database connection URL           | `jdbc:postgresql://localhost:5432/perfect_crud` |
+| `DATABASE_USERNAME` | string  | Database username                            | `postgres`                                      |
+| `DATABASE_PASSWORD` | string  | Database password                            | `postgres`                                      |
+| `JPA_SHOW_SQL`      | boolean | Show SQL queries in logs (`true` or `false`) | `false`                                         |
 
 ## License
 
