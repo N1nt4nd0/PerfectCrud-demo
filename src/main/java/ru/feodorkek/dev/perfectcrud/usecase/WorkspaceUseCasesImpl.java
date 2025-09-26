@@ -1,6 +1,7 @@
 package ru.feodorkek.dev.perfectcrud.usecase;
 
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.feodorkek.dev.perfectcrud.dto.model.TeamDto;
@@ -33,8 +34,8 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
     @Override
     @Transactional
     public WorkspaceResponse updateWorkspace(final long workspaceId, final String newName) {
-        final var workspace = workspaceService.updateWorkspaceById(workspaceId, newName);
-        final var teams = teamService.getTeamsByWorkspaceId(workspace.id());
+        val workspace = workspaceService.updateWorkspaceById(workspaceId, newName);
+        val teams = teamService.getTeamsByWorkspaceId(workspace.id());
         return workspaceMapper.toResponse(workspace, teams);
     }
 
@@ -42,13 +43,13 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
     @Override
     @Transactional(readOnly = true)
     public List<WorkspaceResponse> getWorkspaces() {
-        final var workspaces = workspaceService.getAllWorkspaces();
+        val workspaces = workspaceService.getAllWorkspaces();
         if (workspaces.isEmpty()) {
             return List.of();
         }
-        final var workspacesIds = workspaces.stream()
+        val workspacesIds = workspaces.stream()
                 .map(WorkspaceDto::id).toList();
-        final var teamsByWorkspace = teamService.getTeamsByWorkspaceIds(workspacesIds).stream()
+        val teamsByWorkspace = teamService.getTeamsByWorkspaceIds(workspacesIds).stream()
                 .collect(Collectors.groupingBy(TeamDto::workspaceId));
         return workspaces.stream()
                 .map(ws -> workspaceMapper.toResponse(ws, teamsByWorkspace.getOrDefault(ws.id(), List.of())))
@@ -64,14 +65,14 @@ public class WorkspaceUseCasesImpl implements WorkspaceUseCases {
     @Override
     @Transactional
     public TeamResponse createTeam(final long workspaceId, final String teamName) {
-        final var workspace = workspaceService.getWorkspaceById(workspaceId);
+        val workspace = workspaceService.getWorkspaceById(workspaceId);
         return teamMapper.toResponse(teamService.createTeam(workspace.id(), teamName));
     }
 
     @Override
     @Transactional
     public TeamResponse updateTeam(final long teamId, final String newName) {
-        final var team = teamService.updateTeamById(teamId, newName);
+        val team = teamService.updateTeamById(teamId, newName);
         return teamMapper.toResponse(team);
     }
 

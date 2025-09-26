@@ -1,6 +1,7 @@
 package ru.feodorkek.dev.perfectcrud.config;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,7 +17,7 @@ public class RestControllerAdviceConfig {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleValidationException(
             final MethodArgumentNotValidException exception) {
-        final var message = exception.getBindingResult().getFieldErrors().stream()
+        val message = exception.getBindingResult().getFieldErrors().stream()
                 .map(error -> String.format("%s: %s", error.getField(), error.getDefaultMessage()))
                 .reduce((msg1, msg2) -> String.format("%s, %s", msg1, msg2))
                 .orElse("Bad request arguments");
@@ -33,7 +34,7 @@ public class RestControllerAdviceConfig {
 
     @ExceptionHandler
     public ResponseEntity<ExceptionResponse> handleGenericException(final Exception exception) {
-        final var exceptionType = exception.getClass().getSimpleName();
+        val exceptionType = exception.getClass().getSimpleName();
         log.error("RestController exception occurred: [{}]: {}", exceptionType, exception.getMessage());
         return ResponseEntity.internalServerError()
                 .body(new ExceptionResponse(exceptionType, exception.getMessage()));

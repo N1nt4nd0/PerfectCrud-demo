@@ -1,6 +1,7 @@
 package ru.feodorkek.dev.perfectcrud.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.feodorkek.dev.perfectcrud.dto.model.WorkspaceDto;
@@ -27,7 +28,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Override
     @Transactional
     public WorkspaceDto updateWorkspaceById(final long id, final String name) {
-        final var workspace = findByIdOrThrow(id);
+        val workspace = findByIdOrThrow(id);
         workspace.setName(name);
         return mapper.toDto(repository.saveAndFlush(workspace));
     }
